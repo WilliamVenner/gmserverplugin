@@ -1,0 +1,10 @@
+[workspace]
+members = ["gmserverplugin", "test"]
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = "thin"
+
+[profile.dev]
+panic = "abort"
