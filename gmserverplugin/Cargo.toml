@@ -2,9 +2,15 @@
 name = "gmserverplugin"
 version = "1.0.0"
 edition = "2021"
+description = "Library for accessing the Lua state in Garry's Mod server plugins"
+repository = "https://github.com/WilliamVenner/gmserverplugin"
+license = "MIT"
+authors = ["William Venner <william@venner.io>"]
+categories = ["development-tools::ffi", "game-development", "development-tools"]
+keywords = ["gmod", "garrysmod", "module", "glua", "server-plugin"]
 
 [lib]
 crate-type = ["staticlib", "rlib"]
 
 [dependencies]
-gmod = { version = "8", features = ["hax"] }
+gmod = { version = "8", default-features = false, features = ["hax"] }
