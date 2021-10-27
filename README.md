@@ -8,6 +8,11 @@ There's a [simple solution](https://github.com/Facepunch/garrysmod-requests/issu
 
 In the mean time, I have created this statically linked hacklioteque that will handle all the bullshit for you. You can use this library in any language you want, as long as it supports FFI with C.
 
+# Important Notes
+
+1. This library is NOT thread-safe. Do not call any of these functions outside of the main thread.
+2. Be careful with managing your state between map changes. You should test this thoroughly. Callbacks will still fire between map changes. You cannot unregister callbacks.
+
 # Usage
 
 If you're not using Rust, you can download a precompiled static library from the [releases page](https://github.com/WilliamVenner/gmserverplugin/releases).
@@ -76,7 +81,3 @@ extern "C" {
     void before_init(Callback);
 }
 ```
-
-# Important Notes
-
-Be careful with managing your state between map changes. You should test this thoroughly. Callbacks will still fire between map changes. You cannot unregister callbacks.
