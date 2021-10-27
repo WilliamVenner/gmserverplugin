@@ -8,7 +8,11 @@ There's a [simple solution](https://github.com/Facepunch/garrysmod-requests/issu
 
 In the mean time, I have created this statically linked hacklioteque that will handle all the bullshit for you. You can use this library in any language you want, as long as it supports FFI with C.
 
-## Usage
+# Usage
+
+If you're not using Rust, you can download a precompiled static library from the [releases page](https://github.com/WilliamVenner/gmserverplugin/releases).
+
+## Events
 
 There are three events you can hook into.
 
@@ -64,6 +68,6 @@ unsafe extern "C" fn CreateInterface() -> *mut std::ffi::c_void {
 
 TODO
 
-## Important Notes
+# Important Notes
 
 Be careful with managing your state between map changes. You should test this thoroughly. Callbacks will still fire between map changes. You cannot unregister callbacks.
