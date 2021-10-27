@@ -203,7 +203,6 @@ dependencies = [
 name = "gmserverplugin_test"
 version = "1.0.0"
 dependencies = [
- "ctor",
  "cxx",
  "cxx-build",
  "gmserverplugin",

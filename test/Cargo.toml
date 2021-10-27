@@ -9,7 +9,6 @@ crate-type = ["cdylib"]
 
 [dependencies]
 gmserverplugin = { path = "../gmserverplugin" }
-ctor = "0"
 cxx = "1"
 
 [build-dependencies]
