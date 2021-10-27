@@ -13,6 +13,10 @@ In the mean time, I have created this statically linked hacklioteque that will h
 1. This library is NOT thread-safe. Do not call any of these functions outside of the main thread.
 2. Be careful with managing your state between map changes. You should test this thoroughly. Callbacks will still fire between map changes. You cannot unregister callbacks.
 
+# Signatures
+
+If the signatures in this library are outdated, please [let me know](https://github.com/WilliamVenner/gmserverplugin/issues/new) or [submit a PR](https://github.com/WilliamVenner/gmserverplugin/compare) - the signatures can be found [here](https://github.com/WilliamVenner/gmserverplugin/blob/master/gmserverplugin/src/sigs.rs#L21-L66).
+
 # Usage
 
 If you're not using Rust, you can download a precompiled static library from the [releases page](https://github.com/WilliamVenner/gmserverplugin/releases).
