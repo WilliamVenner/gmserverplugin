@@ -15,8 +15,16 @@ extern "C" fn after_init(ptr: *mut c_void) {
 	println!("after_init: {:?}", ptr);
 }
 
-#[ctor::ctor]
-unsafe fn dllentry() {
+#[cxx::bridge]
+mod plugin {
+	extern "C++" {
+		include!("plugin.h");
+		unsafe fn CreateInterface() -> usize;
+	}
+}
+
+#[no_mangle]
+unsafe extern "C" fn CreateInterface() -> *mut c_void {
 	println!("CreateInterface");
 
 	println!("Hooking");
@@ -38,4 +46,5 @@ unsafe fn dllentry() {
 	gmserverplugin::after_init(after_init);
 
 	println!("Done");
+	plugin::CreateInterface() as *mut c_void
 }
