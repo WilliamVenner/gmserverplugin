@@ -20,7 +20,7 @@ jobs:
         toolchain: nightly
         override: true
     - name: Build
-      run: cargo build --release --target x86_64-unknown-linux-gnu
+      run: cargo build --release --target x86_64-unknown-linux-gnu --manifest-path gmserverplugin/Cargo.toml
     - name: Rename binaries
       run: mv target/x86_64-unknown-linux-gnu/release/libgmserverplugin.a target/x86_64-unknown-linux-gnu/release/libgmserverplugin_linux64.a
     - name: Release
@@ -47,7 +47,7 @@ jobs:
         default: true
         override: true
     - name: Build
-      run: cargo build --release --target i686-unknown-linux-gnu
+      run: cargo build --release --target i686-unknown-linux-gnu --manifest-path gmserverplugin/Cargo.toml
     - name: Rename binaries
       run: mv target/i686-unknown-linux-gnu/release/libgmserverplugin.a target/i686-unknown-linux-gnu/release/libgmserverplugin_linux32.a
     - name: Release
@@ -68,7 +68,7 @@ jobs:
         toolchain: nightly
         override: true
     - name: Build
-      run: cargo build --release --target x86_64-pc-windows-msvc
+      run: cargo build --release --target x86_64-pc-windows-msvc --manifest-path gmserverplugin/Cargo.toml
     - name: Rename binaries
       run: mv target/x86_64-pc-windows-msvc/release/gmserverplugin.lib target/x86_64-pc-windows-msvc/release/gmserverplugin_win64.lib
     - name: Release
@@ -91,7 +91,7 @@ jobs:
         default: true
         override: true
     - name: Build
-      run: cargo build --release --target i686-pc-windows-msvc
+      run: cargo build --release --target i686-pc-windows-msvc --manifest-path gmserverplugin/Cargo.toml
     - name: Rename binaries
       run: mv target/i686-pc-windows-msvc/release/gmserverplugin.lib target/i686-pc-windows-msvc/release/gmserverplugin_win32.lib
     - name: Release
