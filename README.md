@@ -18,9 +18,7 @@ There are three events you can hook into.
 | `before_init` | Called before includes/init.lua is executed.<br>At this point, stuff like `SERVER` and `NULL` have been defined in the global state. |
 | `after_init` | Called after includes/init.lua is executed.<br>At this point, we've loaded all the Lua extension in Garry's Mod into the Lua state. The gamemode will be loaded shortly after this event. |
 
-### Rust
-
-(Use the [`gmod`](https://github.com/WilliamVenner/gmod-rs) crate for a swiss army knife library for making Garry's Mod binary modules and server plugins)
+## Rust
 
 #### Cargo.toml
 
@@ -30,6 +28,8 @@ crate-type = ["cdylib"]
 
 [dependencies]
 gmserverplugin = "*"
+# OR
+gmod = { version = "*", features = ["server-plugin"] } # The gmod crate will re-export gmserverplugin for you with the `server-plugin` feature. https://github.com/WilliamVenner/gmod-rs
 ```
 
 #### lib.rs
@@ -60,7 +60,7 @@ unsafe extern "C" fn CreateInterface() -> *mut std::ffi::c_void {
 }
 ```
 
-### C++
+## C++
 
 TODO
 
