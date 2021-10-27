@@ -13,4 +13,4 @@ keywords = ["gmod", "garrysmod", "module", "glua", "server-plugin"]
 crate-type = ["staticlib", "rlib"]
 
 [dependencies]
-gmod = { version = "8", default-features = false, features = ["hax"] }
+gmod = { version = "9", default-features = false, features = ["hax"] }

@@ -163,9 +163,9 @@ dependencies = [
 
 [[package]]
 name = "gmod"
-version = "8.0.0"
+version = "9.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "715c1eec3ce86b2871086e9577f6e6a68ea1e58a188422826d50d18f3d15d0e4"
+checksum = "02f31a37273d9ffe5eadca9e181650f80098b674161cb75a5b8d5ff58850790f"
 dependencies = [
  "cfg_table",
  "cstr",
