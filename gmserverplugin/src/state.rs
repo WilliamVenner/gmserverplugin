@@ -42,7 +42,7 @@ pub(crate) fn read_hooks<P: AsRef<Path>>(path: P) -> Result<Vec<HookFn>, std::io
 	loop {
 		let mut ptr = [0u8; std::mem::size_of::<HookFn>()];
 		match f.read_exact(&mut ptr) {
-			Ok(_) => hooks.push(unsafe { std::mem::transmute(ptr) }),
+			Ok(_) => hooks.push(unsafe { std::mem::transmute(usize::from_le_bytes(ptr) as *const ()) }),
 			Err(error) if error.kind() == std::io::ErrorKind::UnexpectedEof => break,
 			Err(error) => return Err(error)
 		}
