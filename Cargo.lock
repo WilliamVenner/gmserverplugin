@@ -163,9 +163,9 @@ dependencies = [
 
 [[package]]
 name = "gmod"
-version = "12.0.1"
+version = "14.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a3573d8d390480fc201b868996f348812fda75351ffd12efc140a1df3459a944"
+checksum = "e788f9cdd480cd6b498c9a67b77db9e97c404a5916a48c17ebf9f2aa9ea583c8"
 dependencies = [
  "cfg_table",
  "cstr",
@@ -194,7 +194,7 @@ dependencies = [
 
 [[package]]
 name = "gmserverplugin"
-version = "2.0.0"
+version = "2.0.1"
 dependencies = [
  "gmod",
 ]
