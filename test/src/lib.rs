@@ -1,16 +1,16 @@
 use std::ffi::c_void;
 
-extern "C" fn newstate(ptr: *mut c_void) {
+extern "C" fn newstate(ptr: *mut c_void, _interface: *mut c_void) {
 	assert_ne!(ptr, std::ptr::null_mut());
 	println!("newstate: {:?}", ptr);
 }
 
-extern "C" fn before_init(ptr: *mut c_void) {
+extern "C" fn before_init(ptr: *mut c_void, _interface: *mut c_void) {
 	assert_ne!(ptr, std::ptr::null_mut());
 	println!("before_init: {:?}", ptr);
 }
 
-extern "C" fn after_init(ptr: *mut c_void) {
+extern "C" fn after_init(ptr: *mut c_void, _interface: *mut c_void) {
 	assert_ne!(ptr, std::ptr::null_mut());
 	println!("after_init: {:?}", ptr);
 }

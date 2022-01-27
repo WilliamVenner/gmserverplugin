@@ -48,15 +48,15 @@ gmod = { version = "*", features = ["server-plugin"] } # The gmod crate will re-
 #### lib.rs
 
 ```rust
-extern "C" fn newstate(lua_state: *mut std::ffi::c_void) {
+extern "C" fn newstate(lua_state: *mut std::ffi::c_void, iluainterface: *mut std::ffi::c_void) {
     println!("newstate");
 }
 
-extern "C" fn before_init(lua_state: *mut std::ffi::c_void) {
+extern "C" fn before_init(lua_state: *mut std::ffi::c_void, iluainterface: *mut std::ffi::c_void) {
     println!("before_init");
 }
 
-extern "C" fn after_init(lua_state: *mut std::ffi::c_void) {
+extern "C" fn after_init(lua_state: *mut std::ffi::c_void, iluainterface: *mut std::ffi::c_void) {
     println!("after_init");
 }
 
@@ -77,7 +77,7 @@ unsafe extern "C" fn CreateInterface() -> *mut std::ffi::c_void {
 
 ```cpp
 extern "C" {
-    extern "C" typedef void (*Callback)(void* lua_State);
+    extern "C" typedef void (*Callback)(void* lua_State, void* ILuaInterface);
 
     void init();
     void newstate(Callback);

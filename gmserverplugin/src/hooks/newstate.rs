@@ -2,13 +2,13 @@
 
 use std::ffi::c_void;
 
-use crate::{state, util::SingleThreadSingleton};
+use crate::{state, util::SingleThreadSingleton, HookFn};
 
 static INIT_HOOK: SingleThreadSingleton<Option<gmod::detour::GenericDetour<CLuaInterface_Init>>> = SingleThreadSingleton::new(None);
 const NEWSTATE_FS: &'static str = "garrysmod/cache/gmserverplugin/newstate.mdmp";
 
 #[no_mangle]
-pub unsafe extern "C" fn newstate(callback: extern "C" fn(*mut c_void)) {
+pub unsafe extern "C" fn newstate(callback: HookFn) {
 	state::add_hook(NEWSTATE_FS, callback).expect("Failed to add newstate hook");
 }
 
@@ -20,7 +20,7 @@ extern "C" fn init_hook(this: usize, a2: usize, #[cfg(all(target_os = "windows",
 		let ret = INIT_HOOK.as_ref().unwrap_unchecked().call(this, a2, #[cfg(all(target_os = "windows", target_pointer_width = "32"))] a3);
 
 		let ptr = *((this + std::mem::size_of::<usize>()) as *mut *mut c_void);
-		*super::LUA_STATE.get_mut() = ptr;
+		*super::LUA_STATE.get_mut() = (ptr, this as *mut c_void);
 
 		super::fire_callbacks(NEWSTATE_FS);
 

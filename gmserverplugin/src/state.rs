@@ -1,4 +1,7 @@
-use std::{io::{Read, Write}, path::{Path, PathBuf}};
+use std::{
+	io::{Read, Write},
+	path::{Path, PathBuf},
+};
 
 use crate::hooks::HookFn;
 
@@ -27,7 +30,11 @@ pub(crate) fn is_hooked() -> bool {
 		true
 	} else {
 		if let Err(error) = clear_data_dir(&dir) {
-			panic!("Failed to clear/create directory at {}\n{}", dir.display(), error);
+			panic!(
+				"Failed to clear/create directory at {}\n{}",
+				dir.display(),
+				error
+			);
 		}
 		if let Err(error) = std::fs::write(&path, "") {
 			panic!("Failed to write to {}\n{}", path.display(), error);
@@ -38,19 +45,30 @@ pub(crate) fn is_hooked() -> bool {
 
 pub(crate) fn read_hooks<P: AsRef<Path>>(path: P) -> Result<Vec<HookFn>, std::io::Error> {
 	let mut hooks = vec![];
-	let mut f = std::fs::File::open(path)?;
-	loop {
-		let mut ptr = [0u8; std::mem::size_of::<HookFn>()];
-		match f.read_exact(&mut ptr) {
-			Ok(_) => hooks.push(unsafe { std::mem::transmute(usize::from_le_bytes(ptr) as *const ()) }),
-			Err(error) if error.kind() == std::io::ErrorKind::UnexpectedEof => break,
-			Err(error) => return Err(error)
+	if path.as_ref().exists() {
+		let mut f = std::fs::File::open(path)?;
+		loop {
+			let mut ptr = [0u8; std::mem::size_of::<HookFn>()];
+			match f.read_exact(&mut ptr) {
+				Ok(_) => {
+					hooks.push(unsafe { std::mem::transmute(usize::from_le_bytes(ptr) as *const ()) })
+				}
+				Err(error) if error.kind() == std::io::ErrorKind::UnexpectedEof => break,
+				Err(error) => return Err(error),
+			}
 		}
 	}
 	Ok(hooks)
 }
 
 pub(crate) fn add_hook<P: AsRef<Path>>(path: P, hook: HookFn) -> Result<(), std::io::Error> {
-	let mut f = std::fs::OpenOptions::new().append(true).truncate(false).create(true).open(path)?;
+	std::fs::create_dir_all("garrysmod/cache")?;
+
+	let mut f = std::fs::OpenOptions::new()
+		.append(true)
+		.truncate(false)
+		.create(true)
+		.open(path)?;
+
 	f.write_all(&(hook as *const () as usize).to_le_bytes())
 }

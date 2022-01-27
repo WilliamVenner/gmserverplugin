@@ -2,13 +2,13 @@
 
 use std::ffi::c_void;
 
-use crate::{state, util::SingleThreadSingleton};
+use crate::{state, util::SingleThreadSingleton, HookFn};
 
 static AFTER_INIT_HOOK: SingleThreadSingleton<Option<gmod::detour::GenericDetour<CLuaGamemode_LoadGamemode>>> = SingleThreadSingleton::new(None);
 const AFTER_INIT_FS: &'static str = "garrysmod/cache/gmserverplugin/after_init.mdmp";
 
 #[no_mangle]
-pub unsafe extern "C" fn after_init(callback: extern "C" fn(ptr: *mut c_void)) {
+pub unsafe extern "C" fn after_init(callback: HookFn) {
 	state::add_hook(AFTER_INIT_FS, callback).expect("Failed to add after_init hook");
 }
 

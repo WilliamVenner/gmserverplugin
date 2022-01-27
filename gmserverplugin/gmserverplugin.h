@@ -1,5 +1,5 @@
 extern "C" {
-	extern "C" typedef void (*Callback)(void* lua_State);
+	extern "C" typedef void (*Callback)(void* lua_State, void* ILuaInterface);
 
 	void init();
 	void newstate(Callback);

@@ -1,14 +1,12 @@
 #![allow(non_camel_case_types)]
 
-use std::ffi::c_void;
-
-use crate::{state, util::SingleThreadSingleton};
+use crate::{state, util::SingleThreadSingleton, HookFn};
 
 static BEFORE_INIT_HOOK: SingleThreadSingleton<Option<gmod::detour::GenericDetour<MakeLuaNULLEntity>>> = SingleThreadSingleton::new(None);
 const BEFORE_INIT_FS: &'static str = "garrysmod/cache/gmserverplugin/before_init.mdmp";
 
 #[no_mangle]
-pub unsafe extern "C" fn before_init(callback: extern "C" fn(ptr: *mut c_void)) {
+pub unsafe extern "C" fn before_init(callback: HookFn) {
 	state::add_hook(BEFORE_INIT_FS, callback).expect("Failed to add before_init hook");
 }
 

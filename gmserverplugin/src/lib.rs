@@ -1,4 +1,3 @@
-#![feature(option_result_unwrap_unchecked)]
 #![feature(abi_thiscall)]
 
 #[macro_use]
